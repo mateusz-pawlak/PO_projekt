@@ -17,7 +17,13 @@ public class DatabaseHandler extends Configs {
         return dbConnection;
     }
 
-    public void SendInfo(){
+    public void sendInfo(){
+    }
+
+    public void getInfo(){
+    }
+
+    public void clearDatabase(){
     }
 
     public ResultSet getAdmin(Admin admin) {
