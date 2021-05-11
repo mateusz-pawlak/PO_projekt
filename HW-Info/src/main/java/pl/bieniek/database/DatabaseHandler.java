@@ -21,9 +21,17 @@ public class DatabaseHandler extends Configs {
     }
 
     public void getInfo(){
+        String query = "SELECT * FROM " + Const.INFO_TABLE + " WHERE " + Const.INFO_NAME + "+?";
     }
 
-    public void clearDatabase(){
+    public void clearDatabase() throws SQLException, ClassNotFoundException {
+        String query = "DELETE FROM " + Const.INFO_TABLE;
+        Statement st = getDbConnection().createStatement();
+        st.executeQuery(query);
+    }
+
+    public void deleteUser(){
+        String query = "DELETE FROM " + Const.INFO_TABLE + " WHERE " + Const.INFO_NAME + "+?";
     }
 
     public ResultSet getAdmin(Admin admin) {
