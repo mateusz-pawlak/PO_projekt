@@ -56,4 +56,56 @@ public class DatabaseHandler extends Configs {
         }
         return resultSet;
     }
+
+    //Returns row with specified name from INFO_TABLE. Null if there isn't any.
+    public ResultSet checkName (String name){
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM " + Const.INFO_TABLE + " WHERE " + Const.INFO_NAME + "=?";
+
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+            preparedStatement.setString( 1, name);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return resultSet;
+    }
+
+    //Adds new record to table
+    public void addNewInfo(String name, String[] info_array){
+        try{
+            Statement statement = getDbConnection().createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE
+            );
+            ResultSet set = statement.getResultSet();
+            set.moveToInsertRow();
+            set.updateString(Const.INFO_ID, null);
+            set.updateString(Const.INFO_NAME, name);
+            set.updateString(Const.OS, info_array[0]);
+            set.updateString(Const.CPU, info_array[1]);
+            set.updateString(Const.GPU, info_array[2]);
+            set.updateString(Const.RAM, info_array[3]);
+            set.insertRow();
+            set.moveToCurrentRow();
+
+        }catch(SQLException | ClassNotFoundException throwables){
+            throwables.printStackTrace();
+        }
+    }
+
+    //Update row passed in parameter.
+    public void updateInfo(ResultSet set , String[] info_array){
+        try {
+            set.updateString(Const.OS, info_array[0]);
+            set.updateString(Const.CPU, info_array[1]);
+            set.updateString(Const.GPU, info_array[2]);
+            set.updateString(Const.RAM, info_array[3]);
+            set.updateRow();
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+    }
 }
