@@ -1,6 +1,7 @@
 package pl.bieniek.database;
 
 import pl.bieniek.Admin;
+import pl.bieniek.Employee;
 
 import java.sql.*;
 
@@ -58,13 +59,13 @@ public class DatabaseHandler extends Configs {
     }
 
     //Returns row with specified name from INFO_TABLE. Null if there isn't any.
-    public ResultSet checkName (String name){
+    public ResultSet checkName (Employee employee){
         ResultSet resultSet = null;
         String query = "SELECT * FROM " + Const.INFO_TABLE + " WHERE " + Const.INFO_NAME + "=?";
 
         try {
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
-            preparedStatement.setString( 1, name);
+            preparedStatement.setString( 1, employee.getName());
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
@@ -74,7 +75,7 @@ public class DatabaseHandler extends Configs {
     }
 
     //Adds new record to table
-    public void addNewInfo(String name, String[] info_array){
+    public void addNewInfo(Employee employee){
         try{
             Statement statement = getDbConnection().createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -83,11 +84,11 @@ public class DatabaseHandler extends Configs {
             ResultSet set = statement.getResultSet();
             set.moveToInsertRow();
             set.updateString(Const.INFO_ID, null);
-            set.updateString(Const.INFO_NAME, name);
-            set.updateString(Const.OS, info_array[0]);
-            set.updateString(Const.CPU, info_array[1]);
-            set.updateString(Const.GPU, info_array[2]);
-            set.updateString(Const.RAM, info_array[3]);
+            set.updateString(Const.INFO_NAME, employee.getName());
+            set.updateString(Const.OS, employee.getOs());
+            set.updateString(Const.CPU, employee.getCpu());
+            set.updateString(Const.GPU, employee.getGpu());
+            set.updateString(Const.RAM, employee.getRam());
             set.insertRow();
             set.moveToCurrentRow();
 
@@ -97,12 +98,12 @@ public class DatabaseHandler extends Configs {
     }
 
     //Update row passed in parameter.
-    public void updateInfo(ResultSet set , String[] info_array){
+    public void updateInfo(ResultSet set , Employee employee){
         try {
-            set.updateString(Const.OS, info_array[0]);
-            set.updateString(Const.CPU, info_array[1]);
-            set.updateString(Const.GPU, info_array[2]);
-            set.updateString(Const.RAM, info_array[3]);
+            set.updateString(Const.OS, employee.getOs());
+            set.updateString(Const.CPU, employee.getCpu());
+            set.updateString(Const.GPU, employee.getGpu());
+            set.updateString(Const.RAM, employee.getRam());
             set.updateRow();
         }catch(SQLException throwables){
             throwables.printStackTrace();

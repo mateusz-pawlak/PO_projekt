@@ -23,17 +23,13 @@ public class Employee {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
     public String getOs() {
         return os;
     }
 
-    public void setOs(String os) {
-        this.os = os;
-    }
+    public void setOs(String os) { this.os = os; }
 
     public String getCpu() {
         return cpu;
