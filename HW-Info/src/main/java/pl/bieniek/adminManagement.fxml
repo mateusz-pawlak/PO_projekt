@@ -70,5 +70,6 @@
             <Image url="@assets/icons8-database-52.png" />
          </image>
       </ImageView>
+      <Text fx:id="lbDisplayInfo" fill="WHITE" layoutX="130.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="341.35546875" />
    </children>
 </AnchorPane>

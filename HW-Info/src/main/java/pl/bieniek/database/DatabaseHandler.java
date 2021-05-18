@@ -31,8 +31,15 @@ public class DatabaseHandler extends Configs {
         st.executeQuery(query);
     }
 
-    public void deleteUser(){
+    public void deleteUser(Employee employee){
         String query = "DELETE FROM " + Const.INFO_TABLE + " WHERE " + Const.INFO_NAME + "+?";
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+            preparedStatement.setString( 1, employee.getName());
+            preparedStatement.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public ResultSet getAdmin(Admin admin) {

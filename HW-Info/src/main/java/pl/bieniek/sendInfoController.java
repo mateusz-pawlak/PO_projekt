@@ -78,7 +78,7 @@ public class sendInfoController {
                     error.printStackTrace();
                 }
             } else {
-                lbDisplayInfo.setText("Input correct name!");
+                tfName.setPromptText("Input correct name!");
             }
         });
     }
