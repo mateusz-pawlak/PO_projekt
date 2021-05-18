@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/PO_projekt.iml" filepath="$PROJECT_DIR$/.idea/PO_projekt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HW-Info/oshi-core.iml" filepath="$PROJECT_DIR$/HW-Info/oshi-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oshi-core.iml" filepath="$PROJECT_DIR$/oshi-core.iml" />
     </modules>
   </component>
 </project>
